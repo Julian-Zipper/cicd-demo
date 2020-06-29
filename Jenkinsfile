@@ -6,18 +6,18 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh 'mvn validate'
-                sh 'mvn compile'
+                sh './mvnw validate'
+                sh './mvnw compile'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh './mvnw test'
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn package'
+                sh './mvnw package'
             }
         }
     }
