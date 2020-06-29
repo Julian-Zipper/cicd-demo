@@ -4,14 +4,20 @@ pipeline {
         pollSCM '* * * * *'
     }
     stages {
-        stage('Build') {
+        stage('Compile') {
             steps {
-                sh './gradlew assemble'
+                sh 'mvn validate'
+                sh 'mvn compile'
             }
         }
         stage('Test') {
             steps {
-                sh './gradlew test'
+                sh 'mvn test'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn package'
             }
         }
     }
