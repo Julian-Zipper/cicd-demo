@@ -4,6 +4,11 @@ pipeline {
         pollSCM '* * * * *'
     }
     stages {
+        stage ('Pre-check') {
+            steps {
+                sh './mvnw -v'
+            }
+        }
         stage('Compile') {
             steps {
                 sh './mvnw validate'
