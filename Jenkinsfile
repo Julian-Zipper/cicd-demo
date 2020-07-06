@@ -6,23 +6,17 @@ pipeline {
     stages {
         stage ('Pre-check') {
             steps {
-                sh './mvnw -v'
-            }
-        }
-        stage('Compile') {
-            steps {
-                sh './mvnw validate'
-                sh './mvnw compile'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './mvnw test'
+                sh './gradlew -v'
             }
         }
         stage('Build') {
             steps {
-                sh './mvnw package'
+                sh './gradlew assemble'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew test'
             }
         }
     }

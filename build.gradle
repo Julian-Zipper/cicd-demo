@@ -38,9 +38,7 @@ dependencies {
 }
 
 group = 'com.julianzipper'
-version = '0.0.1-SNAPSHOT'
 description = 'demo'
-sourceCompatibility = '1.8'
 
 publishing {
     publications {
@@ -56,4 +54,19 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+}
+
+String imageName = "julianzipper/cicd-demo:$version"
+
+docker {
+    name imageName
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+    name project.name
+    image imageName
+    ports '8081:8081'
+    clean true
 }
